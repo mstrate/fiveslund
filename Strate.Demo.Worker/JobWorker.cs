@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Strate.Common;
+using Strate.Demo.Common;
 using Strate.Demo.Data;
 using Strate.Demo.Persistence;
 using Strate.Demo.Processing;

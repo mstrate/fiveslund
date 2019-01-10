@@ -1,4 +1,4 @@
-﻿namespace Strate.Common
+﻿namespace Strate.Demo.Common
 {
     /// <summary>
     ///     Provides an interface to classes that serve as configuration stores.

@@ -55,11 +55,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Strate.Demo\Strate.Common\Strate.Common.csproj">
+    <ProjectReference Include="..\Strate.Demo.Common\Strate.Demo.Common.csproj">
       <Project>{F47107CF-4FAE-45EC-9571-B13E4F565E51}</Project>
-      <Name>Strate.Common</Name>
+      <Name>Strate.Demo.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Strate.Demo\Strate.Demo.Data\Strate.Demo.Data.csproj">
+    <ProjectReference Include="..\Strate.Demo.Data\Strate.Demo.Data.csproj">
       <Project>{68DCFE0F-E351-4C3E-BFB0-0F1E052CEAF2}</Project>
       <Name>Strate.Demo.Data</Name>
     </ProjectReference>

@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 
-namespace Strate.Common
+namespace Strate.Demo.Common
 {
     /// <summary>
     ///     Represents a class that serves configuration options from an

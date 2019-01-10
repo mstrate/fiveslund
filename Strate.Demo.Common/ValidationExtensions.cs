@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Strate.Common
+namespace Strate.Demo.Common
 {
     public static class ValidationExtensions
     {

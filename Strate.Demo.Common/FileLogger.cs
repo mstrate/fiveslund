@@ -3,7 +3,7 @@ using System.IO;
 
 using Newtonsoft.Json;
 
-namespace Strate.Common
+namespace Strate.Demo.Common
 {
     public class FileLogger : ILogger
     {

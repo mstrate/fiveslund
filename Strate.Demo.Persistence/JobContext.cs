@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Strate.Common;
+using Strate.Demo.Common;
 using Strate.Demo.Data;
 
 namespace Strate.Demo.Persistence

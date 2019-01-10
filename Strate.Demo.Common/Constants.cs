@@ -1,4 +1,4 @@
-﻿namespace Strate.Common
+﻿namespace Strate.Demo.Common
 {
     public static class Constants
     {

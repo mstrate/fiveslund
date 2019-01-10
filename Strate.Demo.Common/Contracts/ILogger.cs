@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Strate.Common
+namespace Strate.Demo.Common
 {
     public interface ILogger
     {

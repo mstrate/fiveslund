@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace Strate.Common
+namespace Strate.Demo.Common
 {
     public class BasicReadOnlyConfigurationManager : IReadOnlyConfigurationManager
     {

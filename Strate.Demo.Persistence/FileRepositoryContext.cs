@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 
-using Strate.Common;
+using Strate.Demo.Common;
 using Strate.Demo.Data;
 
 namespace Strate.Demo.Persistence

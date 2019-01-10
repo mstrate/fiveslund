@@ -50,23 +50,23 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Strate.Demo.Common\Strate.Demo.Common.csproj">
+      <Project>{F47107CF-4FAE-45EC-9571-B13E4F565E51}</Project>
+      <Name>Strate.Demo.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Strate.Demo.Persistence\Strate.Demo.Persistence.csproj">
       <Project>{99295F7B-C200-40B4-B6C2-D8E2647B3DE3}</Project>
       <Name>Strate.Demo.Persistence</Name>
     </ProjectReference>
-    <ProjectReference Include="Strate.Common\Strate.Common.csproj">
-      <Project>{F47107CF-4FAE-45EC-9571-B13E4F565E51}</Project>
-      <Name>Strate.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="Strate.Demo.Data\Strate.Demo.Data.csproj">
+    <ProjectReference Include="..\Strate.Demo.Data\Strate.Demo.Data.csproj">
       <Project>{68DCFE0F-E351-4C3E-BFB0-0F1E052CEAF2}</Project>
       <Name>Strate.Demo.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="Strate.Demo.Processing\Strate.Demo.Processing.csproj">
+    <ProjectReference Include="..\Strate.Demo.Processing\Strate.Demo.Processing.csproj">
       <Project>{4763E8D4-FC52-4E45-881E-5234D5936812}</Project>
       <Name>Strate.Demo.Processing</Name>
     </ProjectReference>
-    <ProjectReference Include="Strate.Demo.Worker\Strate.Demo.Worker.csproj">
+    <ProjectReference Include="..\Strate.Demo.Worker\Strate.Demo.Worker.csproj">
       <Project>{7E426260-ABC5-4A83-A236-B95B5A31691D}</Project>
       <Name>Strate.Demo.Worker</Name>
     </ProjectReference>

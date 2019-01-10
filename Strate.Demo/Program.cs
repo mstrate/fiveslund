@@ -1,4 +1,4 @@
-﻿using Strate.Common;
+﻿using Strate.Demo.Common;
 using Strate.Demo.Persistence;
 using Strate.Demo.Processing;
 using Strate.Demo.Worker;

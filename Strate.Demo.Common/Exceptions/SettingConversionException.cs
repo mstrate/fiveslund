@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Strate.Common
+namespace Strate.Demo.Common
 {
     /// <summary>
     ///     Represents a failure to convert a setting to the desired type.
