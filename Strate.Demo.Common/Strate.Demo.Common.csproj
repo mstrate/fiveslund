@@ -51,7 +51,6 @@
     <Compile Include="Contracts\ILogger.cs" />
     <Compile Include="BasicReadOnlyConfigurationManager.cs" />
     <Compile Include="Exceptions\SettingConversionException.cs" />
-    <Compile Include="Constants.cs" />
     <Compile Include="FileLogger.cs" />
     <Compile Include="ValidationExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

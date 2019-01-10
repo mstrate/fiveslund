@@ -4,32 +4,38 @@ using Strate.Demo.Data;
 
 namespace Strate.Demo.Persistence
 {
-    public class JobContext : IJobContext
+    /// <summary>
+    ///     Represents the context within which <see cref="Job"/> processing
+    ///     takes place.
+    /// </summary>
+    public class JobProcessingContext : IJobProcessingContext
     {
         private readonly IRepositoryContext<Job> sourceRepositoryContext;
         private readonly IRepositoryContext<Job> destinationRepositoryContext;
         private readonly ILogger logger;
 
-        public JobContext(IReadOnlyConfigurationManager readOnlyConfigurationManager)
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="JobProcessingContext"/> class.
+        /// </summary>
+        /// <param name="readOnlyConfigurationManager">The readonly configuration manager.</param>
+        public JobProcessingContext(IReadOnlyConfigurationManager readOnlyConfigurationManager)
         {
             readOnlyConfigurationManager.ShouldNotBeNull(nameof(readOnlyConfigurationManager));
 
-            readOnlyConfigurationManager.ShouldContainSettings(JobContext.RequiredSettings);
-
-            var sourceRepositoryContextFilePath =  readOnlyConfigurationManager
-                .GetSetting(Constants.SettingsKeys.SourceDataFilePath.ToString());
-
-            var destinationRepositoryContextFilePath = readOnlyConfigurationManager
-                .GetSetting(Constants.SettingsKeys.DestinationDataFilePath.ToString());
+            readOnlyConfigurationManager.ShouldContainSettings(JobProcessingContext.RequiredSettings);
 
             var loggingFilePath = readOnlyConfigurationManager
                 .GetSetting(Constants.SettingsKeys.LoggingFilePath.ToString());
-
             this.logger = new FileLogger(loggingFilePath);
-            this.sourceRepositoryContext = new FileRepositoryContext(sourceRepositoryContextFilePath, logger);
-            this.destinationRepositoryContext = new FileRepositoryContext(destinationRepositoryContextFilePath, logger);
 
+            var sourceRepositoryContextFilePath =  readOnlyConfigurationManager
+                .GetSetting(Constants.SettingsKeys.SourceDataFilePath.ToString());
+            this.sourceRepositoryContext = new FileRepositoryContext(sourceRepositoryContextFilePath, logger);
             this.SourceRepository = new JobRepository(this.sourceRepositoryContext);
+
+            var destinationRepositoryContextFilePath = readOnlyConfigurationManager
+                .GetSetting(Constants.SettingsKeys.DestinationDataFilePath.ToString());
+            this.destinationRepositoryContext = new FileRepositoryContext(destinationRepositoryContextFilePath, logger);
             this.DestinationRepository = new JobRepository(this.destinationRepositoryContext);
         }
 
@@ -43,10 +49,19 @@ namespace Strate.Demo.Persistence
             }
         }
 
+        /// <summary>
+        ///     The repository containing the source data.
+        /// </summary>
         public IJobRepository SourceRepository { get; }
 
+        /// <summary>
+        ///     The repository containg the destination data.
+        /// </summary>
         public IJobRepository DestinationRepository { get; }
 
+        /// <summary>
+        ///     Saves all the changes for the current operation.
+        /// </summary>
         public void SaveChanges()
         {
             this.sourceRepositoryContext.WriteData(this.SourceRepository.GetAll());

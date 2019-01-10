@@ -8,7 +8,7 @@
         /// <summary>
         ///     Gets the value of a setting given its key.
         /// </summary>
-        /// <param name="key">Key of the app setting.</param>
+        /// <param name="key">Key of the setting.</param>
         /// <returns>The value of the setting.</returns>
         string GetSetting(string key);
     }

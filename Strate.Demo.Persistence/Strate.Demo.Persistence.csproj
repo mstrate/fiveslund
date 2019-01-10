@@ -44,13 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
     <Compile Include="Contracts\IJobRepository.cs" />
     <Compile Include="Contracts\IRepositoryContext.cs" />
-    <Compile Include="JobContext.cs" />
+    <Compile Include="JobProcessingContext.cs" />
     <Compile Include="JobRepository.cs" />
     <Compile Include="FileRepositoryContext.cs" />
     <Compile Include="Repository.cs" />
-    <Compile Include="Contracts\IJobContext.cs" />
+    <Compile Include="Contracts\IJobProcessingContext.cs" />
     <Compile Include="Contracts\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

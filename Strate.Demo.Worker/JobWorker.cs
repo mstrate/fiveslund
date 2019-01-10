@@ -8,30 +8,41 @@ using Strate.Demo.Processing;
 
 namespace Strate.Demo.Worker
 {
-    public class JobWorker
+    /// <summary>
+    ///     Provides methods for doing work on <see cref="Job"/> entities.
+    /// </summary>
+    public class JobWorker : IWorker
     {
-        private readonly IJobContext jobContext;
+        private readonly IJobProcessingContext jobProcessingContext;
         private readonly IEnumerable<IProcessor<Job>> processors;
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="JobWorker"/> class.
+        /// </summary>
+        /// <param name="jobProcessingContext">The job processing context.</param>
+        /// <param name="processors">The processors used to process jobs.</param>
         public JobWorker(
-            IJobContext jobContext,
+            IJobProcessingContext jobProcessingContext,
             IEnumerable<IProcessor<Job>> processors
             )
         {
-            jobContext.ShouldNotBeNull(nameof(jobContext));
+            jobProcessingContext.ShouldNotBeNull(nameof(jobProcessingContext));
             processors.ShouldNotBeNullOrEmpty(nameof(processors));
 
-            this.jobContext = jobContext;
+            this.jobProcessingContext = jobProcessingContext;
             this.processors = processors;
 
             // make sure there are some jobs to process (obviously would not do this
-            // in a real-world scenario
+            // in a real-world scenario)
             this.EnsureUnprocessedJobs();
         }
 
+        /// <summary>
+        ///     Processes all of the unprocessed <see cref="Job"/> entities.
+        /// </summary>
         public void DoWork()
         {
-            var jobs = this.jobContext.SourceRepository.GetUnprocessedJobs();
+            var jobs = this.jobProcessingContext.SourceRepository.GetUnprocessedJobs();
 
             foreach (var job in jobs)
             {
@@ -40,14 +51,14 @@ namespace Strate.Demo.Worker
                     processor.Process(job);
                 }
                 job.Status = ProcessingStatus.Complete;
-                this.jobContext.DestinationRepository.Add(job);
-                this.jobContext.SaveChanges();
+                this.jobProcessingContext.DestinationRepository.Add(job);
+                this.jobProcessingContext.SaveChanges();
             }
         }
 
         private void EnsureUnprocessedJobs()
         {
-            var jobs = this.jobContext.SourceRepository.GetUnprocessedJobs();
+            var jobs = this.jobProcessingContext.SourceRepository.GetUnprocessedJobs();
 
             if (!jobs.Any())
             {
@@ -61,9 +72,9 @@ namespace Strate.Demo.Worker
                         Status = ProcessingStatus.Pending
                     };
 
-                    this.jobContext.SourceRepository.Add(newJob);
+                    this.jobProcessingContext.SourceRepository.Add(newJob);
                 }
-                this.jobContext.SaveChanges();
+                this.jobProcessingContext.SaveChanges();
             }
         }
     }

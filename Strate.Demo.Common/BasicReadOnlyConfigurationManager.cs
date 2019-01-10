@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace Strate.Demo.Common
 {
+    /// <summary>
+    ///     Provides methods for accessing configuration data
+    ///     in a readonly manner.
+    /// </summary>
     public class BasicReadOnlyConfigurationManager : IReadOnlyConfigurationManager
     {
         private readonly IReadOnlySettingsStore settingsStore;
@@ -22,37 +25,13 @@ namespace Strate.Demo.Common
         /// <summary>
         ///     Gets the value of a setting given its key.
         /// </summary>
-        /// <param name="key">Name of the app setting.</param>
+        /// <param name="key">Name of the setting.</param>
         /// <returns>The value of the setting.</returns>
         public string GetSetting(string key)
         {
             key.ShouldNotBeNullEmptyOrWhiteSpace(nameof(key));
 
             return this.settingsStore.GetSetting(key);
-        }
-
-        /// <summary>
-        ///     Gets the setting cast to the specified type.
-        /// </summary>
-        /// <typeparam name="T">The type to convert the setting to.</typeparam>
-        /// <param name="key">The key.</param>
-        /// <returns>The setting converted to type T.</returns>
-        public T GetSetting<T>(object key)
-        {
-            var keyString = key?.ToString();
-            var setting = this.GetSetting(keyString);
-
-            if (string.IsNullOrWhiteSpace(setting) && default(T) == null) { return default(T); }
-            var targetConversionType = Nullable.GetUnderlyingType(typeof(T)) ?? typeof(T);
-
-            try
-            {
-                return (T)Convert.ChangeType(setting, targetConversionType, CultureInfo.InvariantCulture);
-            }
-            catch (Exception ex)
-            {
-                throw new SettingConversionException($"Unable to convert setting '{key}' to '{typeof(T)}'", ex);
-            }
         }
 
         /// <summary>

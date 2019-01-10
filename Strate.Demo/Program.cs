@@ -5,17 +5,17 @@ using Strate.Demo.Worker;
 
 namespace Strate.Demo
 {
+    /// <summary>
+    ///     The entry point into the Strate.Demo application.
+    /// </summary>
     class Program
     {
         static void Main(string[] args)
         {
-            var jobContext = new JobContext(new BasicReadOnlyConfigurationManager(new AppSettingsSettingStore()));
+            var jobProcessingContext = new JobProcessingContext(new BasicReadOnlyConfigurationManager(new AppSettingsSettingStore()));
             var worker = new JobWorker(
-                jobContext,
-                new[]
-                {
-                    new ModifyJobProcessor()
-                });
+                jobProcessingContext,
+                new[] { new ModifyJobProcessor() });
             worker.DoWork();
         }
     }
