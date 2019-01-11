@@ -65,7 +65,7 @@ namespace Strate.Demo.Persistence
         {
             try
             {
-                File.WriteAllText(this.filePath, JsonConvert.SerializeObject(data));
+                File.WriteAllText(this.filePath, JsonConvert.SerializeObject(data, Formatting.Indented));
             }
             catch (Exception ex)
             {

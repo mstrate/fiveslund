@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Strate.Demo.Common;
 using Strate.Demo.Data;
 using Strate.Demo.Persistence;
@@ -40,20 +41,14 @@ namespace Strate.Demo.Worker
         /// <summary>
         ///     Processes all of the unprocessed <see cref="Job"/> entities.
         /// </summary>
-        public void DoWork()
+        /// <returns>A <see cref="Task"/> that represents the status of the operation.</returns>
+        public async Task DoWorkAsync()
         {
             var jobs = this.jobProcessingContext.SourceRepository.GetUnprocessedJobs();
 
-            foreach (var job in jobs)
-            {
-                foreach (var processor in this.processors)
-                {
-                    processor.Process(job);
-                }
-                job.Status = ProcessingStatus.Complete;
-                this.jobProcessingContext.DestinationRepository.Add(job);
-                this.jobProcessingContext.SaveChanges();
-            }
+            var jobTasks = jobs.Select(job => this.ProcessJobAsync(job));
+
+            await Task.WhenAll(jobTasks).ConfigureAwait(false);
         }
 
         private void EnsureUnprocessedJobs()
@@ -76,6 +71,17 @@ namespace Strate.Demo.Worker
                 }
                 this.jobProcessingContext.SaveChanges();
             }
+        }
+
+        private async Task ProcessJobAsync(Job job)
+        {
+            var processorTasks = this.processors.Select(processor => processor.ProcessAsync(job));
+
+            await Task.WhenAll(processorTasks).ConfigureAwait(false);
+
+            job.Status = ProcessingStatus.Complete;
+            this.jobProcessingContext.DestinationRepository.Add(job);
+            this.jobProcessingContext.SaveChanges();
         }
     }
 }

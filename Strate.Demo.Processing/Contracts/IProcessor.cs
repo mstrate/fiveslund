@@ -1,4 +1,6 @@
-﻿namespace Strate.Demo.Processing
+﻿using System.Threading.Tasks;
+
+namespace Strate.Demo.Processing
 {
     /// <summary>
     ///     Provides methods for processing an entity.
@@ -10,6 +12,7 @@
         ///     Processes the provided entity.
         /// </summary>
         /// <param name="entity">The entity to process.</param>
-        void Process(TType entity);
+        /// <returns>A <see cref="Task"/> that represents the status of the operation.</returns>
+        Task ProcessAsync(TType entity);
     }
 }

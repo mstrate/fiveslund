@@ -16,7 +16,7 @@ namespace Strate.Demo
             var worker = new JobWorker(
                 jobProcessingContext,
                 new[] { new ModifyJobProcessor() });
-            worker.DoWork();
+            worker.DoWorkAsync().GetAwaiter().GetResult();
         }
     }
 }

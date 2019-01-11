@@ -1,4 +1,6 @@
-﻿namespace Strate.Demo.Worker
+﻿using System.Threading.Tasks;
+
+namespace Strate.Demo.Worker
 {
     /// <summary>
     ///     Provides methods for doing work.
@@ -8,6 +10,7 @@
         /// <summary>
         ///     Method to do work.
         /// </summary>
-        void DoWork();
+        /// <returns>A <see cref="Task"/> that represents the status of the operation.</returns>
+        Task DoWorkAsync();
     }
 }
